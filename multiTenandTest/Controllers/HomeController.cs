@@ -1,21 +1,48 @@
-using Microsoft.AspNetCore.Mvc;
-using multiTenandTest.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using multiTenandTest.Data;
+using multiTenandTest.entitys;
+using multiTenandTest.Models;
 
 namespace multiTenandTest.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            this.context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var modelo = await ConstruirModeloHomeIndex();
+            return View(modelo);
+        }
+
+        [HttpPost]
+        //[TienePermiso(Permisos.Productos_Crear)]
+        public async Task<IActionResult> Index(Producto producto)
+        {
+            context.Add(producto);
+            await context.SaveChangesAsync();
+            var modelo = await ConstruirModeloHomeIndex();
+            return View(modelo);
+        }
+
+        private async Task<HomeIndexViewModel> ConstruirModeloHomeIndex()
+        {
+            var productos = await context.Productos.ToListAsync();
+            var paises = await context.Paises.ToListAsync();
+
+            var modelo = new HomeIndexViewModel();
+            modelo.Productos = productos;
+            modelo.Países = paises;
+            return modelo;
         }
 
         public IActionResult Privacy()
@@ -26,7 +53,12 @@ namespace multiTenandTest.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(
+                new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                }
+            );
         }
     }
 }

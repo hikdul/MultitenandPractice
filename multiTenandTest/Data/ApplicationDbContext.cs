@@ -115,11 +115,10 @@ namespace multiTenandTest.Data
 
         #region logica de negocios
 
-        public DbSet<Producto> Productos => Set<Producto>();
-        public DbSet<Pais> Paises => Set<Pais>();
         public DbSet<Empresa> Empresa => Set<Empresa>();
-        public DbSet<EmpresaUsuarioPermisos> EmpresaUsuarioPermisos =>
-            Set<EmpresaUsuarioPermisos>();
+        public DbSet<EmpresaUsuarioPermisos> EmpresaUsuarioPermisos => Set<EmpresaUsuarioPermisos>();
+        public DbSet<Pais> Paises => Set<Pais>();
+        public DbSet<Producto> Productos => Set<Producto>();
         public DbSet<Vinculacion> Vinculacion => Set<Vinculacion>();
 
         #endregion
