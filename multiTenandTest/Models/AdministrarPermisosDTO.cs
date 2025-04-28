@@ -4,7 +4,6 @@
     {
         public string UsuarioId { get; set; } = null!;
         public string? Email { get; set; }
-        public List<PermisoUsuarioDTO> Permisos { get; set; } = 
-            new List<PermisoUsuarioDTO>();
+        public List<PermisoUsuarioDTO> Permisos { get; set; } = new List<PermisoUsuarioDTO>();
     }
 }

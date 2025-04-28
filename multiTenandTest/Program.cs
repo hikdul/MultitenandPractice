@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using multiTenandTest.Seguridad;
 using multiTenandTest.Data;
 using multiTenandTest.Services;
 
@@ -25,10 +27,15 @@ builder.Services.ConfigureApplicationCookie(opt =>
 
 builder.Services.AddControllersWithViews();
 
-
 builder.Services.AddTransient<IServicioTenant, ServicioTenant>();
 builder.Services.AddTransient<IUsersService, UsersServices>();
 builder.Services.AddScoped<IChangeTenantServices, ChangeTenantServices>();
+
+//? : seguridad, donde las interfaces las entrega el mismo .net
+builder.Services.AddSingleton<IAuthorizationPolicyProvider, TienePermisoPolicyProvider>();
+builder.Services.AddScoped<IAuthorizationHandler, TienePermisoHandler>();
+
+
 
 var app = builder.Build();
 

@@ -242,7 +242,7 @@ namespace multiTenandTest.Data.Migrations
 
                     b.HasIndex("userCreatedId");
 
-                    b.ToTable("Empresa");
+                    b.ToTable("Empresa", (string)null);
                 });
 
             modelBuilder.Entity("multiTenandTest.entitys.EmpresaUsuarioPermisos", b =>
@@ -260,7 +260,7 @@ namespace multiTenandTest.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("EmpresaUsuarioPermisos");
+                    b.ToTable("EmpresaUsuarioPermisos", (string)null);
                 });
 
             modelBuilder.Entity("multiTenandTest.entitys.Pais", b =>
@@ -274,7 +274,7 @@ namespace multiTenandTest.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Paises");
+                    b.ToTable("Paises", (string)null);
 
                     b.HasData(
                         new
@@ -319,7 +319,7 @@ namespace multiTenandTest.Data.Migrations
 
                     b.HasIndex("TenantId");
 
-                    b.ToTable("Productos");
+                    b.ToTable("Productos", (string)null);
                 });
 
             modelBuilder.Entity("multiTenandTest.entitys.Vinculacion", b =>
@@ -349,7 +349,7 @@ namespace multiTenandTest.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Vinculacion");
+                    b.ToTable("Vinculacion", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

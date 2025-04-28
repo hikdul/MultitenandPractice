@@ -1,0 +1,31 @@
+﻿@using multiTenandTest.Helpers
+@using multiTenandTest.entitys
+@model List<Vinculacion>
+
+<h1>Vinculaciones pendientes</h1>
+<h5>
+    Las siguientes empresas te han invitado para que colabores:
+</h5>
+
+<ul>
+    @foreach (var vinculacion in Model)
+    {
+        <form asp-action="Index">
+            <li>
+                <input type="hidden" name="empresaId" value="@vinculacion.EmpresaId" />
+                <div>
+                    La empresa <span class="font-weight-bold">
+                        @vinculacion.Empresa.nombre</span> te invita a vincularte.
+                </div>
+                <div>
+                    <button type="submit"
+                        asp-route-vinculacionEstatus="@VinculationStatus.aceptada"
+                        class="btn btn-primary">Aceptar</button>
+                    <button type="submit" 
+                        asp-route-vinculacionEstatus="@VinculationStatus.rechazada" 
+                        class="btn btn-danger">Rechazar</button>
+                </div>
+            </li>
+        </form>
+    }
+</ul>

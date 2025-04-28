@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Authorization
+@using multiTenandTest.Seguridad
+@using multiTenandTest.Helpers
 @using multiTenandTest.entitys
 @* @using multiTenandTest.seguridad *@
 @model HomeIndexViewModel
@@ -28,8 +30,8 @@
     <h3>Productos</h3>
     @if (User.Identity is not null && User.Identity.IsAuthenticated)
     {
-        @* if (await _authorizationService.TienePermiso(User, Permisos.Productos_Crear))
-        { *@
+        if (await _authorizationService.TienePermiso(User, Permisos.prod_crear))
+        { 
             <form method="post" class="row row-cols-lg-auto g-3 align-items-center">
                 <div class="col-12">
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del producto">
@@ -39,7 +41,7 @@
                     <button type="submit" class="btn btn-primary">Crear producto</button>
                 </div>
             </form>
-        @* } *@
+         } 
 
         <ul>
             @foreach (var producto in Model.Productos)

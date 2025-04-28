@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using multiTenandTest.Data;
 using multiTenandTest.entitys;
 using multiTenandTest.Models;
+using multiTenandTest.Seguridad;
 
 namespace multiTenandTest.Controllers
 {
@@ -25,7 +26,7 @@ namespace multiTenandTest.Controllers
         }
 
         [HttpPost]
-        //[TienePermiso(Permisos.Productos_Crear)]
+        [TienePermiso(Helpers.Permisos.prod_crear)]
         public async Task<IActionResult> Index(Producto producto)
         {
             context.Add(producto);
